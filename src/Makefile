@@ -13,7 +13,7 @@ init:: veryclean requirements.txt isolate
 	$(PYTHON) -m pip freeze
 
 isolate::
-	test -d $(VENV_ROOT) || python3 -m venv $(VENV_ROOT)
+	test -d $(VENV_ROOT) || python3.9 -m venv $(VENV_ROOT)
 
 execute:: build run
 
