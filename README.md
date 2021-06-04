@@ -83,6 +83,12 @@ This project shortens a repository start setup, considering:
     * [Semantic Versioning][-2]
     * [Conventional Commit][-3]
     * [Keep a Changelog][-4]
+    
+It also powers up development workflow by:
+* Inclusion of an appropriate .gitignore file
+* Inclusion of a minimal requirements file
+* Inclusion of a proficient Makefile that improve development management
+* Inclusion of preconfigured Django project settings functionalities
 
 ### Folder structure
 ```

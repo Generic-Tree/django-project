@@ -23,6 +23,7 @@ run::
 build:: compile
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+	$(DJANGO_ADMIN) loaddata auth
 
 compile::
 	$(DJANGO_ADMIN) collectstatic --noinput
