@@ -1,19 +1,21 @@
-# Conceptual Repository
+# Django Project
 > This intends to be an [readme-documented][-0], [open-source-licensed][-1], [semantic-versioned][-2],
 [conventional-committed][-3] and [changelogged][-4] git repository starting point
-for the development of a brand-new project
+for the development of a brand-new [twelve-factor][-5] Django project
 
-A straightforward beginning for an open-source project repository
+A straightforward beginning for an open-source Django project repository
 
 [-0]: https://www.makeareadme.com/ "Make a README"
 [-1]: https://choosealicense.com/licenses/ "Choose a License"
 [-2]: https://semver.org/ "Semantic Versioning"
 [-3]: https://www.conventionalcommits.org/en/v1.0.0/ "Conventional Commits"
 [-4]: https://keepachangelog.com/en/1.0.0/ "Keep a Changelog"
+[-5]: https://12factor.com/ "Twelve Factor"
 
 [>1]: https://github.com/RichardLitt/standard-readme/blob/master/spec.md "Standard readme specification"
 [>2]: https://www.repostatus.org "Repo maintenance status"
 [>3]: https://choosealicense.com/licenses/gpl-3.0/ "GPL 3.0 License description"
+[>4]: https://docs.djangoproject.com/en/3.2/intro/tutorial01/ "Django tutorial"
 
 [!1]: https://github.com/generic-tree/root/generate "Github repository's template generation URL"
 
@@ -42,14 +44,26 @@ First of all, [![create a new repository][B1]][!1] from this template, \
 Name it accordingly and place where it best fits for your team.
 
 ### Development environment
-Make sure you have `Git` installed:
+Make sure you have `Git`, `Make` and `Python` installed:
 ```bash
 $ git --version
 git version 2.25.1
+$ make --version
+GNU Make 4.2.1
+$ python3 --version
+Python 3.9.0+
 ```
 
 Thus, clone the recent-created repository locally,
-and you'll be ready to start developing your project.
+and set up its development environment:
+
+```bash
+$ make init
+$ . venv/bin/activate
+```
+
+Finally, you are ready to create [your Django's first app][>4]
+and proceed developing your application.
 
 ### Repo publication
 After all, you should make this project your own: \
@@ -77,7 +91,12 @@ This project shortens a repository start setup, considering:
 ├── .gitignore                  VCS ignored files manifest
 ├── CHANGELOG.md                Release notes description
 ├── LICENSE                     License file
-└── README.md                   Repo readme document
+├── Makefile                    Development management facilities
+├── README.md                   Repo readme document
+├── requirements.txt            Python dependency descriptor
+└── src
+    ├── __project__             Django project root folder
+    └── manage.py               Django's command-line utility
 ```
 
 

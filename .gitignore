@@ -1,1 +1,11 @@
 # This file specifies untracked files to be ignored in code versioning
+
+## Build
+__pycache__/
+/static/
+**/db.sqlite3
+
+## Development
+.idea/
+venv/
+.env
