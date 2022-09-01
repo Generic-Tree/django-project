@@ -12,20 +12,27 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from django.core.management.utils import get_random_secret_key
 
+from .env import env
+
+
+# Project path record
+PROJECT_DIR = Path(__file__).resolve().parent
+BACKEND_DIR = PROJECT_DIR.parent
+SOURCE_DIR = BACKEND_DIR.parent
+REPO_DIR = SOURCE_DIR.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-3oc(1@9d%s&nna&53xg%cqeb4pbzfp%i&+l*wl32f3oh4rk3jg'
+SECRET_KEY = env('SECRET_KEY') or get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 
 # Application definition
@@ -78,7 +85,7 @@ WSGI_APPLICATION = '__project__.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BACKEND_DIR / 'db.sqlite3',
     }
 }
 
@@ -107,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
