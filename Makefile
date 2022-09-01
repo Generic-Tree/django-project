@@ -54,9 +54,11 @@ execute:: build run ## Build and Run application
 build:: clean ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+	$(DJANGO_ADMIN) makemessages --all --ignore $(VENV_DIR)
 
 compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput
+	$(DJANGO_ADMIN) compilemessages
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver
