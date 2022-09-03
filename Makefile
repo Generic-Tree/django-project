@@ -17,6 +17,7 @@ GNUMAKEFLAGS += --no-print-directory
 REPO_DIR ?= $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 SOURCE_DIR ?= src
 BACKEND_DIR ?= $(SOURCE_DIR)/service
+STATIC_DIR ?= $(BACKEND_DIR)/static
 VENV_DIR ?= venv
 
 # Target files
@@ -24,8 +25,8 @@ ENV_FILE ?= .env
 REQUIREMENTS_TXT ?= requirements.txt
 MANAGE_PY ?= $(BACKEND_DIR)/manage.py
 EPHEMERAL_ARCHIVES ?= \
-	src/service/static \
-	src/service/db.sqlite3
+	$(STATIC_DIR) \
+	$(BACKEND_DIR)/db.sqlite3
 
 # Executables definition
 DJANGO_ADMIN ?= $(PYTHON) $(MANAGE_PY)
@@ -56,7 +57,7 @@ build:: clean compile ## Process source code into an executable program
 	$(DJANGO_ADMIN) migrate
 
 compile:: ## Treat file generation
-	$(DJANGO_ADMIN) collectstatic --noinput
+	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver

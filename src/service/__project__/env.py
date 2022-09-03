@@ -17,6 +17,7 @@ env = environ.Env(
     SECRET_KEY=(str, None),
     DEBUG=(bool, True),
     ALLOWED_HOSTS=(list, ['*']),
+    STATIC_DIR=(str, 'static'),
 )
 
 # Manage choosen .env file consuption.

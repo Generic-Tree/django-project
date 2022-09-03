@@ -5,7 +5,8 @@
 
 ## Build
 __pycache__/
-/static/
+src/service/static/
+src/service/media/
 **/db.sqlite3
 *.pyc
 *.log
