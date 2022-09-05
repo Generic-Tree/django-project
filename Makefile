@@ -24,6 +24,7 @@ VENV_DIR ?= venv
 ENV_FILE ?= .env
 REQUIREMENTS_TXT ?= requirements.txt
 MANAGE_PY ?= $(BACKEND_DIR)/manage.py
+WSGI_MODULE ?= src.service.__project__.wsgi
 EPHEMERAL_ARCHIVES ?= \
 	$(STATIC_DIR) \
 	$(BACKEND_DIR)/db.sqlite3
@@ -32,6 +33,11 @@ EPHEMERAL_ARCHIVES ?= \
 DJANGO_ADMIN ?= $(PYTHON) $(MANAGE_PY)
 PYTHON ?= $(VENV_DIR)/bin/python3
 PIP ?= $(PYTHON) -m pip
+GUNICORN ?= $(PYTHON) -m gunicorn
+
+# Environment defaults
+HOST ?= 0.0.0.0
+PORT ?= 8000
 
 
 %: # Treat unrecognized targets
@@ -60,7 +66,10 @@ compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
 
 run:: ## Launch application locally
-	$(DJANGO_ADMIN) runserver --nostatic
+	$(GUNICORN) $(WSGI_MODULE) \
+		--bind $(HOST):$(PORT) \
+		--pythonpath $(BACKEND_DIR) \
+		--reload
 
 check:: ## Output application status
 	$(DJANGO_ADMIN) check
