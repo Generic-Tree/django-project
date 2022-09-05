@@ -6,3 +6,4 @@
 
 Django~=4.0
 django-environ~=0.9
+whitenoise~=6.2

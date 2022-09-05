@@ -60,7 +60,7 @@ compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
 
 run:: ## Launch application locally
-	$(DJANGO_ADMIN) runserver
+	$(DJANGO_ADMIN) runserver --nostatic
 
 check:: ## Output application status
 	$(DJANGO_ADMIN) check
