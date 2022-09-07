@@ -61,6 +61,7 @@ execute:: build run ## Build and Run application
 build:: clean compile ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+	$(DJANGO_ADMIN) createsuperuser --noinput
 
 compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
@@ -71,9 +72,15 @@ run:: ## Launch application locally
 		--pythonpath $(BACKEND_DIR) \
 		--reload
 
+
+ndef = $(if $(value $(1)),,$(error $(1) not set))
+require_env = $(foreach env,$(sort $(1)),$(call ndef,env))
+
 check:: ## Output application status
-	$(DJANGO_ADMIN) check
-	$(DJANGO_ADMIN) diffsettings
+	$(call require_env,AAA)
+	$(call ndef,CCC)
+	#$(DJANGO_ADMIN) check
+	#$(DJANGO_ADMIN) diffsettings
 
 test:: ## Verify application's behavior requirements completeness
 	$(DJANGO_ADMIN) test
@@ -89,6 +96,14 @@ veryclean:: clean ## Delete all generated files
 	rm -fr $(VENV_DIR)
 	find $(SOURCE_DIR) -iname "*.pyc" -iname "*.pyo" -delete
 	find $(SOURCE_DIR) -name "__pycache__" -type d -exec rm -rf {} +
+
+_%: ## Assert % environment variable is set
+	@ if [ "$($(*))" = "" ]; then \
+     	echo "Environment variable $(*) must be set"; \
+        exit 1; \
+    else \
+        echo "$(*) = $($(*))"; \
+    fi
 
 
 .EXPORT_ALL_VARIABLES:
