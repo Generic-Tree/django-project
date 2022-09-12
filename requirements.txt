@@ -1,0 +1,7 @@
+# Service dependence descriptor
+#
+# This file specifies other distributions required to be installed when service is.
+# See https://pip.pypa.io/en/stable/reference/requirements-file-format/.
+
+
+Django~=4.0

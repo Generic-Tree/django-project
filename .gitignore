@@ -2,3 +2,16 @@
 #
 # This file specifies untracked files to be ignored in code versioning.
 # See https://www.atlassian.com/git/tutorials/saving-changes/gitignore.
+
+
+## Build
+__pycache__/
+*.pyc
+*.log
+*.pot
+
+## Development
+.idea/
+venv/
+static/
+db.sqlite3
