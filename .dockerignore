@@ -1,0 +1,11 @@
+# Containarization filter-out patterns
+#
+# This file specifies archives to be ignored when building execution environment
+# See https://docs.docker.com/engine/reference/builder/#dockerignore-file.
+
+
+.git*
+Dockerfile
+venv
+static
+db.sqlite3
