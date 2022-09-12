@@ -12,6 +12,7 @@ __pycache__/
 
 ## Development
 .idea/
+.env
 venv/
 static/
 db.sqlite3
