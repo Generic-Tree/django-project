@@ -17,12 +17,14 @@ GNUMAKEFLAGS += --no-print-directory
 ROOT_DIR ?= $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 SOURCE_DIR ?= $(ROOT_DIR)/src
 VENV_DIR ?= $(ROOT_DIR)/venv
+STATIC_DIR ?= $(SOURCE_DIR)/static
 
 # Target files
 ENV_FILE ?= .env
 REQUIREMENTS_TXT ?= requirements.txt
 MANAGE_PY ?= $(SOURCE_DIR)/manage.py
 EPHEMERAL_ARCHIVES ?= \
+	$(STATIC_DIR) \
 	$(SOURCE_DIR)/db.sqlite3
 
 # Executables definition
@@ -49,9 +51,12 @@ init:: veryclean prepare $(REQUIREMENTS_TXT) ## Configure development environmen
 
 execute:: setup run ## Setup and run application
 
-setup:: clean ## Process source code into an executable program
+setup:: clean compile ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+
+compile:: ## Treat file generation
+	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver
@@ -71,4 +76,4 @@ veryclean:: clean ## Delete all generated files
 
 .EXPORT_ALL_VARIABLES:
 .ONESHELL:
-.PHONY: help prepare init execute setup run check clean veryclean
+.PHONY: help prepare init execute setup compile run check clean veryclean
