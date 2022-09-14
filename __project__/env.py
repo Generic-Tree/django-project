@@ -17,6 +17,8 @@ env = environ.Env(
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
     CSRF_TRUSTED_ORIGINS=(list, ['http://*', 'https://*']),
+
+    STATIC_DIR=(str, 'static'),
 )
 
 # Manage chosen .env file consumption.
