@@ -14,3 +14,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Configure django static files management
 - Configure project internalization machinery
 - Setup whitenoise to serve static files
+- Setup gunicorn as application server

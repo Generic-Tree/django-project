@@ -19,9 +19,11 @@ STATIC_DIR ?= $(ROOT_DIR)/static
 
 # Target files
 ENV_FILE ?= .env
+PID_FILE ?= .pid
 REQUIREMENTS_TXT ?= requirements.txt
 MANAGE_PY ?= manage.py
 EPHEMERAL_ARCHIVES ?= \
+	$(PID_FILE) \
 	$(STATIC_DIR) \
 	db.sqlite3
 
@@ -29,10 +31,13 @@ EPHEMERAL_ARCHIVES ?= \
 PYTHON ?= $(VENV_DIR)/bin/python3
 PIP ?= $(PYTHON) -m pip
 DJANGO_ADMIN ?= $(PYTHON) $(MANAGE_PY)
+GUNICORN ?= $(PYTHON) -m gunicorn
 
 # Execution configuration
 VENV_DIR ?= venv
 DJANGO_SETTINGS_MODULE ?= __project__.settings
+DJANGO_WSGI_MODULE ?= __project__.wsgi
+GUNICORN_SETTINGS_MODULE ?= __project__.gunicorn
 
 
 %: # Treat unrecognized targets
@@ -63,7 +68,13 @@ compile:: ## Treat file generation
 	$(DJANGO_ADMIN) compilemessages --ignore $(VENV_DIR)
 
 run:: ## Launch application locally
-	$(DJANGO_ADMIN) runserver
+	$(GUNICORN) \
+		--pid $(PID_FILE) \
+		--config python:$(GUNICORN_SETTINGS_MODULE) \
+		$(DJANGO_WSGI_MODULE)
+
+finish:: ## Stop application execution
+	-test -r $(PID_FILE) && pkill --echo --pidfile $(PID_FILE)
 
 clean:: ## Delete project ephemeral archives
 	-rm -fr $(EPHEMERAL_ARCHIVES)
@@ -76,4 +87,4 @@ veryclean:: clean ## Delete all generated files
 
 .EXPORT_ALL_VARIABLES:
 .ONESHELL:
-.PHONY: help prepare init execute setup compile run clean veryclean
+.PHONY: help prepare init execute setup compile run finish clean veryclean

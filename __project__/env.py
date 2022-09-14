@@ -13,6 +13,12 @@ import environ
 env = environ.Env(
     ENV_FILE=(str, '.env.example'),
 
+    HOST=(str, '0.0.0.0'),
+    PORT=(int, 8000),
+    WORKERS=(int, None),
+    THREADS=(int, None),
+    RELOAD=(bool, False),
+
     SECRET_KEY=(str, None),
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
