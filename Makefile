@@ -20,13 +20,16 @@ VENV_DIR ?= $(ROOT_DIR)/venv
 # Target files
 ENV_FILE ?= .env
 REQUIREMENTS_TXT ?= requirements.txt
-EPHEMERAL_ARCHIVES ?=
+MANAGE_PY ?= manage.py
+EPHEMERAL_ARCHIVES ?= \
+	db.sqlite3
 
 # Behavior setup
 PROJECT_NAME ?= $(shell basename $(ROOT_DIR) | tr a-z A-Z)
 
 # Executables definition
 GIT ?= git
+DJANGO_ADMIN ?= $(PYTHON) $(MANAGE_PY)
 PYTHON ?= $(VENV_DIR)/bin/python3
 PIP ?= $(PYTHON) -m pip
 
@@ -55,10 +58,13 @@ build:: clean ## Build service running environment
 execute:: setup run ## Setup and run application
 
 setup:: clean compile ## Process source code into an executable program
+	$(DJANGO_ADMIN) makemigrations
+	$(DJANGO_ADMIN) migrate
 
 compile:: ## Treat file generation
 
 run:: ## Launch application locally
+	$(DJANGO_ADMIN) runserver
 
 finish:: ## Stop application execution
 
