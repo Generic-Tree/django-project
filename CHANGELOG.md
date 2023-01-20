@@ -15,3 +15,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Structure python project development starting-point
 - Structure django project development starting-point
 - Configure django to consume configuration from environment
+- Configure django fixture files management

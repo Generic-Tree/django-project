@@ -26,6 +26,7 @@ EPHEMERAL_ARCHIVES ?= \
 
 # Behavior setup
 PROJECT_NAME ?= $(shell basename $(ROOT_DIR) | tr a-z A-Z)
+__LOADDATA__ ?= # Define django's fixture files to be loaded on `setup`
 
 # Executables definition
 GIT ?= git
@@ -60,6 +61,7 @@ execute:: setup run ## Setup and run application
 setup:: clean compile ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+	test -z $(__LOADDATA__) || $(DJANGO_ADMIN) loaddata $(__LOADDATA__)
 
 compile:: ## Treat file generation
 

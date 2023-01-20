@@ -20,6 +20,7 @@ env = environ.Env(
     SECRET_KEY=(str, get_random_secret_key()),
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
+    FIXTURE_DIRS=(list, [PROJECT_DIR / 'fixtures'])
 )
 
 # Manage chosen .env file consumption.
