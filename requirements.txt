@@ -5,3 +5,4 @@
 
 
 Django~=4.1
+django-environ~=0.9
