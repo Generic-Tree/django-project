@@ -12,6 +12,9 @@ from django.core.management.utils import get_random_secret_key
 from .path import *
 
 
+__STATIC__ = 'static'
+
+
 # Define expected env variables, its casting and default value
 # See https://django-environ.readthedocs.io/en/latest/tips.html.
 env = environ.Env(
@@ -20,7 +23,11 @@ env = environ.Env(
     SECRET_KEY=(str, get_random_secret_key()),
     DEBUG=(bool, False),
     ALLOWED_HOSTS=(list, ['*']),
-    FIXTURE_DIRS=(list, [PROJECT_DIR / 'fixtures'])
+    FIXTURE_DIRS=(list, [PROJECT_DIR / 'fixtures']),
+
+    STATIC_DIR=(str, __STATIC__),
+    STATIC_URL=(str, __STATIC__ + '/'),
+    STATICFILES_DIRS=(list, [PROJECT_DIR / __STATIC__]),
 )
 
 # Manage chosen .env file consumption.

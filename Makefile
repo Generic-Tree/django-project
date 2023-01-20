@@ -16,12 +16,14 @@ GNUMAKEFLAGS += --no-print-directory
 # Path record
 ROOT_DIR ?= $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 VENV_DIR ?= $(ROOT_DIR)/venv
+STATIC_DIR ?= $(ROOT_DIR)/static
 
 # Target files
 ENV_FILE ?= .env
 REQUIREMENTS_TXT ?= requirements.txt
 MANAGE_PY ?= manage.py
 EPHEMERAL_ARCHIVES ?= \
+	$(STATIC_DIR) \
 	db.sqlite3
 
 # Behavior setup
@@ -64,6 +66,7 @@ setup:: clean compile ## Process source code into an executable program
 	test -z $(__LOADDATA__) || $(DJANGO_ADMIN) loaddata $(__LOADDATA__)
 
 compile:: ## Treat file generation
+	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver
