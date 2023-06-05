@@ -1,0 +1,22 @@
+# Application data sample
+#
+# This file defines initial data to be used on application setup
+# See https://docs.djangoproject.com/en/4.1/howto/initial-data/.
+
+
+- model: auth.user
+  pk: 1
+  fields:
+      username: admin
+      email: admin@ovni.com
+      # password: dev
+      password: pbkdf2_sha256$390000$xnwAeldidwqtmFlJegd1dq$UPqatjwo8vX16FY0hAt3CW8kXasWq5Kdsm87pm/XfuU=
+      last_login: null
+      is_superuser: true
+      is_staff: true
+      is_active: true
+      last_name: ''
+      first_name: ''
+      date_joined: 2022-10-05 16:50:52.408019+00:00
+      groups: []
+      user_permissions: []
