@@ -61,7 +61,7 @@ execute:: setup compile run ## Setup and run application
 
 setup:: clean ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
-	$(DJANGO_ADMIN) migrate
+	$(DJANGO_ADMIN) migrate --run-syncdb
 	test -z $(LOAD_FIXTURES) || $(DJANGO_ADMIN) loaddata $(LOAD_FIXTURES)
 	$(DJANGO_ADMIN) makemessages --all --ignore $(VENV_DIR)
 
@@ -80,6 +80,10 @@ finish:: ## Stop application execution
 
 clean:: ## Delete project ephemeral archives
 	-rm -fr $(EPHEMERAL_ARCHIVES)
+	-find . -path "*/migrations/*.py" \
+			-not -name "__init__.py" \
+			-not -path "./$(VENV_DIR)/*" \
+			-delete
 
 veryclean:: clean ## Delete all generated files
 	-rm -fr $(VENV_DIR)
