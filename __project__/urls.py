@@ -20,11 +20,17 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.urls import path, include
 
+from .routers import router
+
 
 urlpatterns = i18n_patterns(
     path('', lambda req: redirect('admin/')),
     path('admin/', admin.site.urls),
     path('l10n/', include('rosetta.urls')),
+    path('api/', include([
+        path('rest/', include('rest_framework.urls')),
+        path('', include(router.urls)),
+    ]))
 )
 
 urlpatterns += staticfiles_urlpatterns()
