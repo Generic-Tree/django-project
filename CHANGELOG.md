@@ -12,3 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Structure django project development starting-point
 - Configure project .env file consumption
 - Configure django static files management
+- Configure project internalization machinery

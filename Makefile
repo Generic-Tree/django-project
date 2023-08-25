@@ -51,14 +51,16 @@ init:: veryclean prepare $(REQUIREMENTS_TXT) ## Configure development environmen
 	$(PIP) install --upgrade pip
 	$(PIP) install -r $(REQUIREMENTS_TXT) --upgrade
 
-execute:: setup run ## Setup and run application
+execute:: setup compile run ## Setup and run application
 
-setup:: clean compile ## Process source code into an executable program
+setup:: clean ## Process source code into an executable program
 	$(DJANGO_ADMIN) makemigrations
 	$(DJANGO_ADMIN) migrate
+	$(DJANGO_ADMIN) makemessages --all --ignore $(VENV_DIR)
 
 compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
+	$(DJANGO_ADMIN) compilemessages --ignore $(VENV_DIR)
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver

@@ -14,15 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf.urls.i18n import i18n_patterns
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.shortcuts import redirect
-from django.urls import path
+from django.urls import path, include
 
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('', lambda req: redirect('admin/')),
     path('admin/', admin.site.urls),
-]
+    path('l10n/', include('rosetta.urls')),
+)
 
 urlpatterns += staticfiles_urlpatterns()
