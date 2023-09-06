@@ -1,0 +1,28 @@
+- model: lottery.tournament
+  pk: 1
+  fields:
+    title: 2023.1
+    start: 2023-02-01 00:00:00+00:00
+    range: 100
+
+- model: lottery.tournament
+  pk: 2
+  fields:
+    title: 2023.2
+    start: 2023-03-01 00:00:00+00:00
+    range: 60
+
+
+- model: lottery.bet
+  pk: 1
+  fields:
+    tournament: 1
+    choices: [1, 5, 10, 13, 22, 60]
+    registered_at: 2023-01-21T04:48:50.363Z
+
+- model: lottery.bet
+  pk: 2
+  fields:
+    tournament: 2
+    choices: [4, 60, 12, 44, 24, 40]
+    registered_at: 2023-01-21T04:48:50.363Z

@@ -67,6 +67,7 @@ setup:: clean compile ## Process source code into an executable program
 
 compile:: ## Treat file generation
 	$(DJANGO_ADMIN) collectstatic --noinput --clear --link
+	$(DJANGO_ADMIN) compilemessages
 
 run:: ## Launch application locally
 	$(DJANGO_ADMIN) runserver
@@ -90,7 +91,7 @@ clean:: ## Delete project ephemeral archives
 
 veryclean:: clean ## Delete all generated files
 	-rm --force --recursive $(VENV_DIR)
-	find . -iname "*.pyc" -iname "*.pyo" -delete
+	find . -iname "*.pyc" -iname "*.pyo" -iname "*.mo" -delete
 	find . -name "__pycache__" -type d -exec rm -rf {} +
 
 

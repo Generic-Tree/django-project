@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-from .path import *
-from .env import env
+from django.utils.translation import gettext_lazy as _
+
+from __project__.path import *
+from __project__.env import env
 
 
 SECRET_KEY = env('SECRET_KEY')
@@ -30,12 +32,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'lottery',
+    'utils',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -48,7 +54,7 @@ ROOT_URLCONF = '__project__.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': env('TEMPLATE_DIRS'),
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,13 +105,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = env('LANGUAGE_CODE')
 
-TIME_ZONE = 'UTC'
+LANGUAGES = [
+    ('en', _('English')),
+    ('pt', _('Portuguese'))
+]
 
-USE_I18N = True
+LANGUAGE_COOKIE_NAME = env('LANGUAGE_COOKIE_NAME')
 
-USE_TZ = True
+TIME_ZONE = env('TIME_ZONE')
+
+USE_I18N = env('USE_I18N')
+
+USE_L10N = env('USE_L10N')
+
+USE_TZ = env('USE_TZ')
+
+LOCALE_PATHS = env('LOCALE_PATHS')
+
 
 
 # Static files (CSS, JavaScript, Images)

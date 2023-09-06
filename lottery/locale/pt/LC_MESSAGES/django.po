@@ -1,0 +1,90 @@
+# LOTERIA PORTUGUESE TRANSLATION
+# Copyright (C) 2023 SUPERNOVA COMPUTER SCIENCE
+# This file is distributed under the same license as the project package.
+# ARTHUR HENRIQUE <ARTHUR.HENRIQUE.DELLA.FRAGA@GMAIL.COM>, 2023.
+
+# TODO: Setup file metadata properly
+
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-21 03:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+### ADMIN SITE
+msgid "Lottery"
+msgstr "Loteria"
+
+msgid "Lottery admin"
+msgstr "Administração da Loteria"
+
+msgid "Lottery admin site"
+msgstr "Site de administração da Loteria"
+
+
+
+### MODELS
+
+#: lottery/models.py:12
+msgid "Tournament"
+msgstr "Torneio"
+
+#: lottery/models.py:12
+msgid "title"
+msgstr "título"
+
+#: lottery/models.py:12
+msgid "range"
+msgstr "range"
+
+#: lottery/models.py:12
+msgid "start"
+msgstr "data de início"
+
+#: lottery/models.py:18
+msgid "bet count"
+msgstr "número de apostas"
+
+
+#: lottery/models.py:35
+msgid "Bettable"
+msgstr "Apostável"
+
+#: lottery/models.py:35
+msgid "value"
+msgstr "valor"
+
+
+#: lottery/models.py:49
+msgid "Bet"
+msgstr "Aposta"
+
+#: lottery/model.py:65
+msgid "choices"
+msgstr "escolhas"
+
+#: lottery/models.py:69
+msgid "registered at"
+msgstr "data do registro"
+
+#: lottery/models.py:79
+msgid "bet choices"
+msgstr "escolhas"
+
+
+### ADMIN
+msgctxt "action"
+msgid "bet"
+msgstr "apostar"
+
+msgid "actions"
+msgstr "ações"
